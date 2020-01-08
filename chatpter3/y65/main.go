@@ -7,7 +7,35 @@ type Rect struct {
 	width, height float64
 }
 
+type IFile interface {
+	Read()(i int,err error)
+	Writer()(i int ,err error)
+	Seek()(i int,err error)
+}
+
+type SFile struct {
+
+}
+
+func(sf *SFile)Read()(i int,err error){
+	println("sfile::Read()")
+	return i,err
+}
+
+func(sf *SFile)Writer()(i int ,err error){
+	return i,err
+}
+
+func(sf *SFile)Seek()(i int,err error){
+	return i,err
+}
+
 func main() {
+
+
+	var iff IFile= new(SFile)
+	iff.Read()
+
 	var b Integer = 2
 	var a *Integer = &b
 	a.Add(2)
