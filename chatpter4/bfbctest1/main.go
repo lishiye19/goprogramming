@@ -10,15 +10,26 @@ func Count(ch chan int) {
 }
 
 func main() {
+	ch := make(chan int, 1)
+	for {
+		select {
+		case ch <- 1:
+		case ch <- 2:
+		}
+		i := <-ch
+		fmt.Println("value recived:", i)
+
+	}
+
 	//var m map[string] chan bool
-	chs := make([]chan int, 10)
-	for i := 0; i < 10; i++ {
-		chs[i] = make(chan int)
-		go Count(chs[i])
-	}
-	for _, ch := range chs {
-		<-ch
-	}
+	//chs := make([]chan int, 10)
+	//for i := 0; i < 10; i++ {
+	//	chs[i] = make(chan int)
+	//	go Count(chs[i])
+	//}
+	//for _, ch := range chs {
+	//	<-ch
+	//}
 	//for i := 0; i < 10; i++ {
 	//	go Add(i, i)
 	//}
